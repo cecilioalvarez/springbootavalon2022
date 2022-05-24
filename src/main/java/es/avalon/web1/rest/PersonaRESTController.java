@@ -7,12 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 //Anotacion SF
 @RestController
-@RequestMapping("/webapi/personas") //Le pasamos ruta donde nos devolvera los datos en formato JSON
+@RequestMapping("/webapi/personas") //Le pasamos ruta donde nos devolvera o trabajara los datos en formato JSON
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST}) //Permitimos peticiones desde JAVASCRIPT  https://www.arquitecturajava.com/spring-rest-cors-y-su-configuracion/
 public class PersonaRESTController {
 
     @Autowired
@@ -26,5 +27,10 @@ public class PersonaRESTController {
     @PostMapping (consumes = MediaType.APPLICATION_JSON_VALUE)
     public void insertar(@RequestBody Persona p){
         servicio.insertarPersona(p);
+    }
+
+    @DeleteMapping("/{dni}")
+    public void borrar(@PathVariable String dni) {
+        servicio.borrarPersona(new Persona(dni));
     }
 }
