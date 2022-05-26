@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/webapi/personas")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class PersonaRESTController {
     @Autowired
     private LibroPersonaService servicio;
@@ -21,5 +22,11 @@ public class PersonaRESTController {
     @PostMapping ( consumes = MediaType.APPLICATION_JSON_VALUE )
     public void insertar(@RequestBody  Persona p) {
        servicio.insertarPersona(p);
+    }
+
+    @DeleteMapping("/{dni}")
+    public void borrar(@PathVariable String  dni) {
+
+        servicio.borrarPersona(new Persona(dni));
     }
 }
