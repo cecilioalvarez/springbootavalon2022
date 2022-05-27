@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/webapi/personas")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
 public class PersonaRESTController {
     @Autowired
     private LibroPersonaService servicio;
