@@ -12,7 +12,7 @@ import java.util.List;
 //Anotacion SF
 @RestController
 @RequestMapping("/webapi/libros")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
 public class LibroRESTController {
 
     @Autowired
@@ -23,13 +23,18 @@ public class LibroRESTController {
         return servicio.buscarTodosLosLibros();
     }
 
+    @GetMapping("/{isbn}")
+    public Libro buscarUno(@PathVariable String isbn) {
+        return servicio.buscarUnLibro(isbn);
+    }
+
     @PostMapping (consumes = MediaType.APPLICATION_JSON_VALUE)
     public void insertar(@RequestBody Libro l) {
         servicio.insertarLibro(l);
     }
 
     @DeleteMapping("/{isbn}")
-    public void borrarÇ(@PathVariable String isbn) {
+    public void borrar(@PathVariable String isbn) {
         servicio.borrarLibro(new Libro(isbn));
     }
 
