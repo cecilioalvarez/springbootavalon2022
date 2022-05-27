@@ -13,7 +13,7 @@ import java.util.List;
 //Anotacion SF
 @RestController
 @RequestMapping("/webapi/personas") //Le pasamos ruta donde nos devolvera o trabajara los datos en formato JSON
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST}) //Permitimos peticiones desde JAVASCRIPT  https://www.arquitecturajava.com/spring-rest-cors-y-su-configuracion/
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE}) //Permitimos peticiones desde JAVASCRIPT  https://www.arquitecturajava.com/spring-rest-cors-y-su-configuracion/
 public class PersonaRESTController {
 
     @Autowired
