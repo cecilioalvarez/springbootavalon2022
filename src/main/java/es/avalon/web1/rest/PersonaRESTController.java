@@ -10,13 +10,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/webapi/personas")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE})
 public class PersonaRESTController {
     @Autowired
     private LibroPersonaService servicio;
     @GetMapping
     public List<Persona> buscarTodas() {
         return servicio.buscarTodasLasPersonas();
+    }
+
+    @GetMapping("/{dni}")
+    public Persona  buscarUno(@PathVariable String dni) {
+       
+        return servicio.buscarUnaPersona(dni);
     }
 
     @PostMapping ( consumes = MediaType.APPLICATION_JSON_VALUE )
@@ -28,5 +34,14 @@ public class PersonaRESTController {
     public void borrar(@PathVariable String  dni) {
 
         servicio.borrarPersona(new Persona(dni));
+    }
+
+    @PutMapping("/{dni}")
+    public void actualizar(@PathVariable String  dni,@RequestBody Persona p) {
+        Persona personaVieja=servicio.buscarUnaPersona(dni);
+        //cambias los datos que te interesen
+        personaVieja.setEdad(p.getEdad());
+        personaVieja.setNombre(p.getNombre());
+        servicio.salvarPersona(personaVieja);
     }
 }
