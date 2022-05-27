@@ -11,7 +11,7 @@ import java.util.List;
 //Añadimos los metodos de listar, añadir, borrar....
 @RestController//Anotacion para definir como un controller de JSON(JavaScript Object Notation) "Controlador REST".
 @RequestMapping("/webapi/personas")
-@CrossOrigin(origins = "*", methods={RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods={RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE})
 public class PersonaRESTController {
 
     @Autowired
