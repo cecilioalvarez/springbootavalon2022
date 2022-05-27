@@ -20,7 +20,7 @@ import es.avalon.web1.services.LibroPersonaService;
 //Añadimos los metodos de listar, añadir, borrar....
 @RestController//Anotacion para definir como un controller de JSON(JavaScript Object Notation) "Controlador REST".
 @RequestMapping("/webapi/libros")
-@CrossOrigin(origins = "*", methods={RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods={RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE})
 public class LibroRESTController {
 
     @Autowired
@@ -43,6 +43,11 @@ public class LibroRESTController {
     @DeleteMapping("/{isbn}")
     public void borrar(@PathVariable int isbn){
         servicio.borrarLibro(new Libro(isbn));
+    }
+    @GetMapping("/{isbn}")
+    public Libro buscarUno(@PathVariable int isbn) {
+        
+        return servicio.buscarLibro(isbn);
     }
 }
 
