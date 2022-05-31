@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +21,7 @@ import es.avalon.web1.services.LibroPersonaService;
 //Añadimos los metodos de listar, añadir, borrar....
 @RestController//Anotacion para definir como un controller de JSON(JavaScript Object Notation) "Controlador REST".
 @RequestMapping("/webapi/libros")
-@CrossOrigin(origins = "*", methods={RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE})
+@CrossOrigin(origins = "*", methods={RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
 public class LibroRESTController {
 
     @Autowired
@@ -49,5 +50,14 @@ public class LibroRESTController {
         
         return servicio.buscarLibro(isbn);
     }
+    @PutMapping(value = "/{isbn}")
+    public void actualizar(@PathVariable int isbn, @RequestBody Libro l) {
+        Libro libroViejo = servicio.buscarLibro(isbn);
+        libroViejo.setIsbn(l.getIsbn());
+        libroViejo.setTitulo(l.getTitulo());
+        libroViejo.setAutor(l.getAutor());
+        servicio.salvarLibro(libroViejo);
+    }
+
 }
 
