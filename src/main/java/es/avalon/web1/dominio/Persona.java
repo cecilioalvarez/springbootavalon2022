@@ -26,7 +26,7 @@ public class Persona {
     private String apellidos;
     //añadimos esto para crear la relacion entra la tabla personas y libro
     //En este caso es una relacion de 1 Persona a n Libros
-    @JsonIgnore
+    @JsonIgnore//Estamos ignorando la relacion entre personas y libros a nivel de los datos JSON
     @OneToMany(mappedBy = "persona")
     private List<Libro>libros=new ArrayList<>();
 
